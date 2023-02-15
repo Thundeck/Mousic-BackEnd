@@ -1,5 +1,5 @@
 const express =  require("express")
-const {createAlbum,getAllAlbums} =  require("../Controllers/Album")
+const {createAlbum,getAllAlbums} =  require("../Controllers/Album.controller")
 
 
 const route = express.Router()

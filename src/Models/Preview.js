@@ -1,17 +1,25 @@
 const mongoose = require("mongoose")
 
 const Schema = mongoose.Schema
+const OBJECT = mongoose.Types.ObjectId
+
 
 const PreviewSchema = new Schema({
     audio: {
-        type:String
+        type:String,
+        require:true
     },
     video:{
         type:String,
     },
     duration: {
-        type:Number
+        type:Number,
+        require:true
     },
+    track:{
+        type:OBJECT,
+        require:true
+    }
 })
 
 const PreviewModel = mongoose.model("preview", PreviewSchema)

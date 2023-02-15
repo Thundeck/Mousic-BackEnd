@@ -8,13 +8,17 @@ const TrackSchema = new Schema({
         type:String,
         require:true
     },
+    status: {
+        type:String,
+        default:"private"
+    },
     artist: {
         type:OBJECT,
         require:true
     },
     album: {
         type:OBJECT,
-        require:false
+        require:true
     },
     audio: {
         type:String,
@@ -22,15 +26,15 @@ const TrackSchema = new Schema({
     },
     img: {
         type:String,
-        require:true
+        require:false
     },
     video: {
         type:String,
         require:false
     },
     genre: {
-        type:String,
-        require:false
+        type:OBJECT,
+        require:true
     },
     duration: {
         type:Number,
@@ -49,11 +53,11 @@ const TrackSchema = new Schema({
         require:false
     },
     release_date: {
-        type:Date,
+        type:String,
         require:true
     },
     preview: {
-        type:String,
+        type:OBJECT,
         require:false
     },
     NOT_available_countries: {

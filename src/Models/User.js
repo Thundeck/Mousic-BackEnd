@@ -56,7 +56,7 @@ const UserSchema = new Schema({
     },
     traks: {
         type:[OBJECT]
-    },
+    }
 })
 
 const UserModel = mongoose.model("user", UserSchema)

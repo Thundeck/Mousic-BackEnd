@@ -1,47 +1,61 @@
 const mongoose = require("mongoose")
 
-const OBJECT = mongoose.Types.ObjectId
+const {ObjectId} = mongoose.Types
 
 const Schema = mongoose.Schema
 
 const AlbumSchema = new Schema({
     title: {
         type:String,
-        unique:true
+        require:true,
+        unique:false
+    },
+    status: {
+        type:String,
+        default:"private"
     },
     link: {
         type:String
     },
     img: {
         type:String,
-        unique:true
+        require:true,
+        unique:false
     },
     pricipal_genre: {
-        type: OBJECT,
-        unique:true
+        type:ObjectId,
+        require:true,
+        unique:false
     },
     genres: {
-        type:[OBJECT]
+        type:[ObjectId],// quizas los brackets de los arrays se deben poner rodeando el objeto
+        require:true
     },
     duration: {
-        type:Number
+        type:Number,
+        require:true
     },
     release_date:{
-        type:Date
+        type:String,
+        require:true,
+        unique:false
     } ,
     record_type: {
-        type:String
+        type:String,
+        unique:false
     },
     contributors: {
-        type:[OBJECT]
+        type:[ObjectId]
     },
     artist: {
-        type:OBJECT
+        type:ObjectId,
+        require:true,
+        unique:false
     } ,
     tracks: {
-        type:[OBJECT]
+        type:[ObjectId]
     },
-},{timestamps:true})
+})
 
 const AlbumModel = mongoose.model("album", AlbumSchema)
 

@@ -1,5 +1,5 @@
 const express =  require("express")
-const {createTrack,getAllTracks} =  require("../Controllers/Track")
+const {createTrack,getAllTracks} =  require("../Controllers/Track.controller")
 
 
 const route = express.Router()
