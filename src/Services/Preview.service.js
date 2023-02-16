@@ -33,7 +33,44 @@ const createPreview = async (body) => {
     }
     }
 
+    const getPreviewDetail = async (_id) =>{
+
+        if(!_id) throw "cannot be searched without identification"
+    
+        try {
+            const Preview = await PreviewModel.findById({_id}).populate({
+                path:"track",
+                select:"name img",
+                poulate:{
+                    path:"artist",
+                    select:"nickname img subs"
+                }
+            })
+
+            if(!Preview) throw "Preview not found"
+
+            return Preview
+        } catch (error) {
+            console.log("this is the error",error)
+        }
+    }
+
+    const deletePreview = async (_id) => {
+        if(!_id) throw "cannot be deleted without identification"
+    
+        try {
+            const deleted = await PreviewModel.findOneAndDelete({_id})
+            console.log(deleted)
+            return "capaz que se borro no  tengo idea"
+        } catch (error) {
+            console.log(error)
+        }
+    
+    }
+
 module.exports = {
     getAllPreviews,
-    createPreview
+    createPreview,
+    getPreviewDetail,
+    deletePreview
 }

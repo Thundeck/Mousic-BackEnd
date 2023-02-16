@@ -18,7 +18,8 @@ const TrackSchema = new Schema({
     },
     album: {
         type:OBJECT,
-        require:true
+        require:true,
+        ref:"album"
     },
     audio: {
         type:String,
@@ -34,7 +35,8 @@ const TrackSchema = new Schema({
     },
     genre: {
         type:OBJECT,
-        require:true
+        require:true,
+        ref:"genre"
     },
     duration: {
         type:Number,
@@ -58,7 +60,8 @@ const TrackSchema = new Schema({
     },
     preview: {
         type:OBJECT,
-        require:false
+        require:false,
+        ref:"preview"
     },
     NOT_available_countries: {
         type:Array,
@@ -66,7 +69,8 @@ const TrackSchema = new Schema({
     },
     contributors: {
         type:[OBJECT],
-        require:false
+        require:false,
+        ref:"user"
     },
 })
 

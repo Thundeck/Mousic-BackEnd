@@ -18,7 +18,31 @@ const createGenre = async (req, res) =>{
     }
 }
 
+const getGenreDetail = async (req, res) =>{
+    const {id} = req.params
+
+    try {
+        const Genre = await GenreService.getGenreDetail(id)
+        res.json(Genre).end()
+    } catch (error) {
+        console.log("this is the error",error)
+    }
+}
+
+const deleteGenre = async (req, res) =>{
+    const {id} = req.params
+
+    try {
+        const deleted = await GenreService.deleteGenre(id)
+        res.json(deleted)
+    } catch (error) {
+        console.log("this is the error",error)
+    }
+}
+
 module.exports = {
     getAllGenres,
-    createGenre
+    createGenre,
+    getGenreDetail,
+    deleteGenre
 }

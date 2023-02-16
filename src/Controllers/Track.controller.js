@@ -18,7 +18,31 @@ const createTrack = async (req, res) =>{
     }
 }
 
+
+const getTrackDetail = async (req, res) =>{
+    const {id} = req.params
+    
+    try {
+        const Track = await TrackService.getTrackDetail(id)
+        res.json(Track).end()
+    } catch (error) {
+        console.log("this is the error",error)
+    }
+}
+const deleteTrack = async (req, res) =>{
+    const {id} = req.params
+
+    try {
+        const deleted = await TrackService.deleteTrack(id)
+        res.json(deleted)
+    } catch (error) {
+        console.log("this is the error",error)
+    }
+}
+
 module.exports = {
     getAllTracks,
-    createTrack
+    createTrack,
+    getTrackDetail,
+    deleteTrack
 }

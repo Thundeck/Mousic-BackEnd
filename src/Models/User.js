@@ -10,6 +10,9 @@ const UserSchema = new Schema({
         type:String,
         require:true,
     },
+    img: {
+        type:String
+    },
     lastname: {
         type:String,
         require:true,
@@ -31,13 +34,16 @@ const UserSchema = new Schema({
         type:String
     },
     tracks_likes: {
-        type:[OBJECT]
+        type:[OBJECT],
+        ref:"track"
     },
     albums_likes: {
-        type:[OBJECT]
+        type:[OBJECT],
+        ref:"album"
     },
     subscriptions: {
-        type:[OBJECT] //ARTISTS ARRAY
+        type:[OBJECT],
+        ref:"user" //ARTISTS ARRAY
     },
     email: {
         type:String,
@@ -45,17 +51,20 @@ const UserSchema = new Schema({
         unique:true
     },
     historial: {
-        type:[OBJECT] // TRACKS ARRAY
+        type:[OBJECT],
+        ref:"track" // TRACKS ARRAY
     },
     albums: {
-        type:[OBJECT]
+        type:[OBJECT],
+        ref:"album"
     },
     subs: {
         type:Number,
         default:0
     },
-    traks: {
-        type:[OBJECT]
+    tracks: {
+        type:[OBJECT],
+        ref:"track"
     }
 })
 

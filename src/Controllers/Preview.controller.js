@@ -18,7 +18,31 @@ const createPreview = async (req, res) =>{
     }
 }
 
+const getPreviewDetail = async (req, res) =>{
+    const {id} = req.params
+
+    try {
+        const Preview = await PreviewService.getPreviewDetail(id)
+        res.json(Preview).end()
+    } catch (error) {
+        console.log("this is the error",error)
+    }
+}
+
+const deletePreview = async (req, res) =>{
+    const {id} = req.params
+
+    try {
+        const deleted = await PreviewService.deletePreview(id)
+        res.json(deleted)
+    } catch (error) {
+        console.log("this is the error",error)
+    }
+}
+
 module.exports = {
     getAllPreviews,
-    createPreview
+    createPreview,
+    getPreviewDetail,
+    deletePreview
 }

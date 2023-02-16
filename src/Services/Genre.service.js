@@ -33,7 +33,34 @@ try {
 
 }
 
+const getGenreDetail = async (_id) =>{
+
+    if(!_id) throw "cannot be searched without identification"
+
+    try {
+        const Genre = await GenreModel.findById({_id})
+        if(!Genre) throw "Genre not found"
+        return Genre
+    } catch (error) {
+        console.log("this is the error",error)
+    }
+}
+
+const deleteGenre = async (_id) => {
+    if(!_id) throw "cannot be deleted without identification"
+
+    try {
+        const deleted = await GenreModel.findOneAndDelete({_id})
+        console.log(deleted)
+        return "capaz que se borro no  tengo idea"
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
 module.exports = {
     getAllGenres,
-    createGenre
+    createGenre,
+    getGenreDetail,deleteGenre
 }

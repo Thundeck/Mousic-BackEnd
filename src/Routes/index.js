@@ -11,7 +11,7 @@ const User = require("./User");
 
 
 // Configurar los routers
-router.use("/tracks", Track);
+router.use("/track", Track);
 router.use("/album", Album);
 router.use("/genre", Genre);
 router.use("/preview", Preview);

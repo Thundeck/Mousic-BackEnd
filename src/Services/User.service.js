@@ -50,7 +50,54 @@ const createUser = async (body) => {
 
 }
 
+const getUserDetail = async (_id) =>{
+
+    if(!_id) throw "cannot be searched without identification"
+
+    try {
+        const User = await UserModel.findById({_id}).populate({
+            path:"albums albums_likes",
+            select:"title img",
+            populate:{
+                path:"contributors",
+                select:"nickname"
+        }
+        }).populate({
+            path:"tracks tracks_likes",
+            select:"title img duration audio",
+            populate:{path:"genre"}
+        }
+         ).populate({
+            path:"subscriptions",
+            select:"nickname img subs"})
+
+
+        if(!User) throw "User not found"
+
+        
+        return User
+    } catch (error) {
+        console.log("this is the error",error)
+    }
+}
+
+const deleteUser = async (_id) => {
+    if(!_id) throw "cannot be deleted without identification"
+
+    try {
+        const deleted = await UserModel.findOneAndDelete({_id})
+        console.log(deleted)
+        return "capaz que se borro no  tengo idea"
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
 module.exports = {
     getAllUsers,
-    createUser
+    createUser,
+    getUserDetail,
+    deleteUser
 }

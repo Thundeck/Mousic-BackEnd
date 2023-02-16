@@ -1,4 +1,3 @@
-const express =  require("express")
 const TrackModel = require("../Models/Track")
 const AlbumModel = require("../Models/Album")
 const GenreModel = require("../Models/Genre")
@@ -36,11 +35,18 @@ const createTrack = async (body) => {
     try {
     
         const created = await TrackModel.create(body)
-        const findArtist = await UserModel.find({id:artist})
-        const findAlbum = await UserModel.find({id:album})
-        const artistTrack = await UserModel.findOneAndUpdate({id:artist},{tracks:[...findArtist.tracks,created._id]})
-        const albumTrack = await AlbumModel.findOneAndUpdate({id:album},{tracks:[...findAlbum.tracks,created._id]})
-        return [created,artistTrack,albumTrack] 
+        console.log("esto es created",created)
+
+        const findArtist = await UserModel.findById({_id:artist})
+
+        const findAlbum = await AlbumModel.findById({_id:album})
+        console.log("esto es findAlbum",findAlbum)
+
+        const artistTrack = await UserModel.findOneAndUpdate({_id:artist},{tracks:[...findArtist?.tracks,created?._id]})
+
+        const albumTrack = await AlbumModel.findOneAndUpdate({_id:album},{tracks:[...findAlbum?.tracks,created?._id]})
+
+        return created
         
     } catch (error) {
         console.log(error)
@@ -49,7 +55,43 @@ const createTrack = async (body) => {
     
     }
 
+    const getTrackDetail = async (id) =>{
+
+        if(!id) throw "cannot be searched without identification"
+    
+        try {
+            const Track = await TrackModel.findById({_id:id}).populate({
+                path:"artist contributors",
+                select:"nickname img subs"
+            }).populate({
+                path:"genre preview",
+                select:"name video audio video duration"
+            })
+
+            if(!Track) throw "Track not found"
+
+            return Track
+        } catch (error) {
+            console.log("this is the error",error)
+        }
+    }
+
+    const deleteTrack = async (_id) => {
+        if(!_id) throw "cannot be deleted without identification"
+    
+        try {
+            const deleted = await TrackModel.findOneAndDelete({_id})
+            console.log(deleted)
+            return "capaz que se borro no  tengo idea"
+        } catch (error) {
+            console.log(error)
+        }
+    
+    }
+
 module.exports = {
     getAllTracks,
-    createTrack
+    createTrack,
+    getTrackDetail,
+    deleteTrack
 }

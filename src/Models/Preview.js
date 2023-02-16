@@ -18,7 +18,8 @@ const PreviewSchema = new Schema({
     },
     track:{
         type:OBJECT,
-        require:true
+        require:true,
+        ref:"track"
     }
 })
 
